@@ -11,9 +11,9 @@ public class MainWindow extends JFrame {
 	public MainWindow()
 	{
 		this.setTitle("Tex'Analysis");
-		this.add(new PlayerManager());
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setSize(600, 500);
+		this.add(new PlayerManager());
 		this.setVisible(true);
 	}
 
