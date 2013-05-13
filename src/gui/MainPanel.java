@@ -1,30 +1,34 @@
 package gui;
 
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
+import java.awt.BorderLayout;
+import java.awt.Color;
 
 import javax.swing.JPanel;
 
 /**
  * this classes is used to display all the main elements of the gui
- * @author clement
+ * @author clement & camille
  *
  */
 @SuppressWarnings("serial")
 public class MainPanel extends JPanel {
-	PlayerManager hands;	
-	GridBagLayout layout;
+	TopPanel top;
+	PlayerManager hands;
+	BottomPanel bottom;
+	BorderLayout layout;
 	
 	public MainPanel(){
+		top = new TopPanel();
 		hands = new PlayerManager();
-		layout = new GridBagLayout();
+		bottom = new BottomPanel();
+		layout = new BorderLayout();
+		
 		this.setLayout(layout);
-		GridBagConstraints g = new GridBagConstraints();
-		
-		GUIUtilities.setGridBagConstraint(g, 0, 0, 1, 1, 0, 0);
-		layout.setConstraints(hands, g);
-		this.add(hands);
-		
-		
+		this.setBackground(new Color(246, 246, 248));
+
+		this.add(top, BorderLayout.NORTH);
+		this.add(hands, BorderLayout.CENTER);
+		this.add(bottom, BorderLayout.SOUTH);
+
 	}
 }

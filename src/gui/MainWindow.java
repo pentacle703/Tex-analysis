@@ -10,10 +10,11 @@ public class MainWindow extends JFrame {
 	private static final long serialVersionUID = 1L;
 	public MainWindow()
 	{
-		this.setTitle("Tex'Analysis");
+		this.setTitle("Tex'Analysis 5");
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		this.setSize(600, 500);
-		this.add(new PlayerManager());
+		this.setSize(900, 645);
+		this.setResizable(false);
+		this.setContentPane(new MainPanel());
 		this.setVisible(true);
 	}
 
