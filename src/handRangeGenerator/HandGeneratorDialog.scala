@@ -8,6 +8,7 @@ import scala.swing.BoxPanel
 import scala.swing.Orientation
 import javax.swing.JTextField
 import scala.swing.event.ButtonClicked
+import handRangeGenerator.Game
 
 class HandGeneratorDialog extends Dialog {
   var fieldToModify : JTextField = null
@@ -28,6 +29,14 @@ class HandGeneratorDialog extends Dialog {
   def setFieldToModify(field : JTextField) =
   {
     fieldToModify = field
+    handGenerator.handRange.text = fieldToModify.getText();
+  }
+  
+  def update = 
+  {
+	   val handList = handGenerator.handRangeToHandList(handGenerator.handRange.text)	         
+	 	  handGenerator.Model.update(handList)
+	 	  handGenerator.handRange.text = handGenerator.compact(handGenerator.Model.currentHandList mkString ",")
   }
   
   listenTo(buttonAccept)

@@ -14,7 +14,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import java.util.HashMap;
+
 import handRangeGenerator.HandGeneratorDialog;
+
+
 /**
  * this class is contain the each line of player hand
  * @author clement & camille
@@ -37,6 +41,7 @@ public class PlayerManager extends JPanel{
 	private JButton details[];
 
 	private OnHandRangeClicked onHandRangeClicked;
+	private OnSelectHandRangeClicked onSelectHandRangeClicked;
 
 	private JLabel myOddsLabel;
 	private JTextField myOdds;
@@ -45,18 +50,26 @@ public class PlayerManager extends JPanel{
 
 	HandGeneratorDialog handGenerator;
 
+	/**
+	 * this hash map is used to get the hand range field corresponding to a button
+	 */
+	private HashMap<JButton, JTextField> buttonToTextField;
 	public PlayerManager() {
 		super();
 		this.setLayout(layout);
 		this.setOpaque(false);
 
 		onHandRangeClicked = new OnHandRangeClicked();
+		onSelectHandRangeClicked = new OnSelectHandRangeClicked();
+
 		players = new JLabel[9];
 		ranges = new JTextField[9];
 		selectRange = new JButton[9];
 		result = new JTextField[9];
 		details = new JButton[9];
 		handGenerator = new HandGeneratorDialog();
+		
+		buttonToTextField = new HashMap<JButton, JTextField>();
 		
 		gbc = new GridBagConstraints();
 		
@@ -118,6 +131,7 @@ public class PlayerManager extends JPanel{
 		ranges[n].setMinimumSize(ranges[n].getPreferredSize());
 		ranges[n].addMouseListener(onHandRangeClicked);
 		selectRange[n] = new JButton("Select range");
+		selectRange[n].addMouseListener(onSelectHandRangeClicked);
 		result[n] = new JTextField();
 		result[n].setEditable(false);
 		result[n].setPreferredSize(new Dimension(75, 22));
@@ -150,6 +164,8 @@ public class PlayerManager extends JPanel{
 		gbc.gridwidth = GridBagConstraints.REMAINDER;
 		gbc.insets = new Insets(0, 0, 10, 50);
 		this.add(details[n], gbc);
+
+		buttonToTextField.put(selectRange[n], ranges[n]);
 	}
 	
 	private class OnHandRangeClicked implements MouseListener
@@ -157,8 +173,37 @@ public class PlayerManager extends JPanel{
 		@Override
 		public void mouseClicked(MouseEvent arg0) {
 			JTextField textField = (JTextField) arg0.getComponent();
-			handGenerator.focusOnDialog();
 			handGenerator.setFieldToModify(textField);
+			handGenerator.update();
+			handGenerator.focusOnDialog();
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent arg0) {
+		}
+
+		@Override
+		public void mouseExited(MouseEvent arg0) {
+		}
+
+		@Override
+		public void mousePressed(MouseEvent arg0) {
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent arg0) {
+		}
+		
+	}
+
+	private class OnSelectHandRangeClicked implements MouseListener
+	{
+		@Override
+		public void mouseClicked(MouseEvent arg0) {
+			JButton button = (JButton) arg0.getComponent();
+			handGenerator.setFieldToModify(buttonToTextField.get(button));
+			handGenerator.update();
+			handGenerator.focusOnDialog();
 		}
 
 		@Override
