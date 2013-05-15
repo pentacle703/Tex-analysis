@@ -15,17 +15,40 @@ public class CardButton extends JButton {
 	 */
 	private static final long serialVersionUID = 1L;
 	private Image img;
-	
-	public CardButton(){
+	private int value;
+	private static Image voidCard;
+	{
 		InputStream input = ClassLoader.getSystemResourceAsStream("nocard.png");
 		try {
-			img = ImageIO.read(input);
+			voidCard = ImageIO.read(input);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 	
+	public int getValue() {
+		return value;
+	}
+
+	public void setValue(int value) {
+		this.value = value;
+	}
+
+	public Image getImg() {
+		return img;
+	}
+
+	public void setImg(Image img) {
+		this.img = img;
+	}
+
+	public CardButton(){
+		value = -1;
+		img = voidCard;
+	}
+
 	public CardButton(int i){
+		value = i;
 		InputStream input = ClassLoader.getSystemResourceAsStream(Integer.toString(i) + ".png");
 		try{
 			img = ImageIO.read(input);
@@ -36,5 +59,10 @@ public class CardButton extends JButton {
 	
 	public void paintComponent(Graphics g){
 		g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
+	}
+
+	public void setImgToVoid() {
+		img = voidCard;
+		updateUI();
 	}
 }

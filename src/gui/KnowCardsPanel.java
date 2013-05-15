@@ -13,13 +13,16 @@ public class KnowCardsPanel extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	CardSelector selector;
 
 	public KnowCardsPanel(){
 		super();
 		this.setLayout(new GridBagLayout());
-		
-		HoleCardsPanel holeCards = new HoleCardsPanel();
-		DrawPanel draw = new DrawPanel();
+
+		selector = new CardSelector();
+
+		HoleCardsPanel holeCards = new HoleCardsPanel(selector);
+		DrawPanel draw = new DrawPanel(selector);
 		JButton clearAll = new JButton("Clear All");
 		JButton goButton = new JButton("Go");
 		this.setOpaque(false);

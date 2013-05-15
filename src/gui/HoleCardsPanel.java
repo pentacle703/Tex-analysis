@@ -17,7 +17,7 @@ public class HoleCardsPanel extends JPanel {
 
 	private CardButton card1;
 	private CardButton card2;
-	
+	private CardSelector selector;
 	public HoleCardsPanel(){
 		super();
 		this.setLayout(new GridBagLayout());
@@ -46,4 +46,37 @@ public class HoleCardsPanel extends JPanel {
 		gbc.insets = new Insets(0, 0, 0, 0);
 		this.add(card2, gbc);
 	}
+
+	public HoleCardsPanel(CardSelector selector){
+		super();
+		this.selector = selector;
+		this.setLayout(new GridBagLayout());
+		
+		GridBagConstraints gbc = new GridBagConstraints();
+		
+		JLabel myHoleCardsLabel = new SmallTitleLabel("My hole cards");
+		card1 = new CardButton();
+		card1.setPreferredSize(new Dimension(45, 61));
+		card1.setMinimumSize(card1.getPreferredSize());
+		card1.addMouseListener(selector.getDisplayListener());
+		card2 = new CardButton();
+		card2.setPreferredSize(new Dimension(45, 61));
+		card2.setMinimumSize(card1.getPreferredSize());
+		card2.addMouseListener(selector.getDisplayListener());
+
+		this.setOpaque(false);
+		
+		GUIUtilities.setGridBagConstraint(gbc, 0, 0, GridBagConstraints.REMAINDER, 1, 0, 0);
+		gbc.insets = new Insets(0, 0, 10, 0);
+		this.add(myHoleCardsLabel, gbc);
+		
+		GUIUtilities.setGridBagConstraint(gbc, 0, 1, 1, 1, 0, 0);
+		gbc.insets = new Insets(0, 0, 0, 10);
+		this.add(card1, gbc);
+		
+		GUIUtilities.setGridBagConstraint(gbc, 1, 1, GridBagConstraints.REMAINDER, 1, 0, 0);
+		gbc.insets = new Insets(0, 0, 0, 0);
+		this.add(card2, gbc);
+	}
+
 }
