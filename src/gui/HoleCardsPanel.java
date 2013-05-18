@@ -17,7 +17,6 @@ public class HoleCardsPanel extends JPanel {
 
 	private CardButton card1;
 	private CardButton card2;
-	private CardSelector selector;
 	public HoleCardsPanel(){
 		super();
 		this.setLayout(new GridBagLayout());
@@ -49,7 +48,6 @@ public class HoleCardsPanel extends JPanel {
 
 	public HoleCardsPanel(CardSelector selector){
 		super();
-		this.selector = selector;
 		this.setLayout(new GridBagLayout());
 		
 		GridBagConstraints gbc = new GridBagConstraints();
@@ -77,6 +75,17 @@ public class HoleCardsPanel extends JPanel {
 		GUIUtilities.setGridBagConstraint(gbc, 1, 1, GridBagConstraints.REMAINDER, 1, 0, 0);
 		gbc.insets = new Insets(0, 0, 0, 0);
 		this.add(card2, gbc);
+	}
+
+	public String getPlayerCard() {
+		return card1.getCard() + card2.getCard();
+	}
+
+	public void clearAll() {
+		card1.setValue(-1);//TODO use a function like setToNoCards()
+		card2.setValue(-1);
+		card1.setImgToVoid();
+		card2.setImgToVoid();		
 	}
 
 }

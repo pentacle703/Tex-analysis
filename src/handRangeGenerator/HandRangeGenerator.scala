@@ -35,7 +35,13 @@ class HandRangeGenerator extends GridBagPanel{ game: Game =>
 	def Maincourante = 	Model.currentHandList.toString
 	def resetCourant = {Model.currentHandList = List[String]()
 						Model.update}
-   		
+//   	def clean =
+//   	{
+//		handRange.text = ""
+//		Model.update(handRangeToHandList(handRange.text))
+//   	}
+	
+	
 	object Model extends Publisher[(List[String], String)] {	
 	  var currentHandList = List[String]()
 	  
@@ -50,7 +56,7 @@ class HandRangeGenerator extends GridBagPanel{ game: Game =>
 	      currentHandList = handList
 	      update
 	    }	 
-	  }  
+	  }
 	}
 	
 	//The different views of Model
@@ -207,5 +213,4 @@ class HandRangeGenerator extends GridBagPanel{ game: Game =>
 	   gridy = 1
 	   insets = new Insets(0, 10, 10, 10)
 	 }
-	 def getHand = handRange.text
 }

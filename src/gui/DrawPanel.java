@@ -21,7 +21,6 @@ public class DrawPanel extends JPanel {
 	private CardButton card4;
 	private CardButton card5;
 	
-	private CardSelector selector;
 	public DrawPanel(){
 		super();
 		this.setLayout(new GridBagLayout());
@@ -73,7 +72,6 @@ public class DrawPanel extends JPanel {
 	
 	public DrawPanel(CardSelector selector){
 		super();
-		this.selector = selector;
 		this.setLayout(new GridBagLayout());
 		
 		GridBagConstraints gbc = new GridBagConstraints();
@@ -124,6 +122,23 @@ public class DrawPanel extends JPanel {
 		gbc.gridwidth = GridBagConstraints.REMAINDER;
 		gbc.insets = new Insets(0, 0, 0, 0);
 		this.add(card5, gbc);
+	}
+
+	public String getFlop() {
+		return card1.getCard()+" "+card2.getCard()+" "+ card3.getCard()+" "+card4.getCard()+" "+card5.getCard()+" ";
+	}
+
+	public void clearAll() {
+		card1.setValue(-1);
+		card1.setImgToVoid();
+		card2.setValue(-1);
+		card2.setImgToVoid();
+		card3.setValue(-1);
+		card3.setImgToVoid();
+		card4.setValue(-1);
+		card4.setImgToVoid();
+		card5.setValue(-1);
+		card5.setImgToVoid();
 	}
 
 }

@@ -65,4 +65,49 @@ public class CardButton extends JButton {
 		img = voidCard;
 		updateUI();
 	}
+
+	public String getCard() {
+		String res = "";
+		if(value == -1)
+		{
+			return "";
+		}
+		switch((value-1)%13)
+		{
+		case 0:
+				res += "A";
+				break;
+		case 9:
+				res += "T";
+				break;
+		case 10:
+				res += "J";
+				break;
+		case 11:
+				res += "Q";
+				break;
+		case 12:
+				res += "K";
+				break;
+		default:
+				res += (((value-1)%13) + 1);
+				break;
+		}
+		switch((value-1)/13)
+		{
+			case 0:
+				res += "c";
+				break;
+			case 1:
+				res += "h";
+				break;
+			case 2:
+				res += "s";
+				break;
+			case 3:
+				res += "d";
+				break;
+		}
+		return res;
+	}
 }

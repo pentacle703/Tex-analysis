@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import handRangeGenerator.HandGeneratorDialog;
@@ -47,6 +48,8 @@ public class PlayerManager extends JPanel{
 	private JTextField myOdds;
 	
 	private GridBagConstraints gbc;
+	
+	private int nbrOpponent = 9;
 
 	HandGeneratorDialog handGenerator;
 
@@ -62,7 +65,7 @@ public class PlayerManager extends JPanel{
 		onHandRangeClicked = new OnHandRangeClicked();
 		onSelectHandRangeClicked = new OnSelectHandRangeClicked();
 
-		players = new JLabel[9];
+		players = new JLabel[9];//TODO replace the use of 9 by nbrOpponent
 		ranges = new JTextField[9];
 		selectRange = new JButton[9];
 		result = new JTextField[9];
@@ -114,7 +117,7 @@ public class PlayerManager extends JPanel{
 		myOdds.setBorder(BorderFactory.createLineBorder(new Color(22, 92, 109)));
 		
 		//Setting the "My Odds" label
-		GUIUtilities.setGridBagConstraint(gbc, 0, 0, 1, 1, 0, 0);
+		GUIUtilities.setGridBagConstraint(gbc, 2, 0, 1, 1, 0, 0);
 		gbc.insets = new Insets(0, 50, 20, 20);
 		this.add(myOddsLabel, gbc);
 						
@@ -167,7 +170,20 @@ public class PlayerManager extends JPanel{
 
 		buttonToTextField.put(selectRange[n], ranges[n]);
 	}
-	
+
+	public ArrayList<String> getRanges()
+	{
+		ArrayList<String> opponentRanges = new ArrayList<String>(); 
+		for(int i = 0; i < nbrOpponent; i++)
+		{
+			if(!ranges[i].getText().trim().isEmpty())
+			{
+				opponentRanges.add(ranges[i].getText());
+			}
+		}
+		return opponentRanges;
+	}
+
 	private class OnHandRangeClicked implements MouseListener
 	{
 		@Override
@@ -223,4 +239,26 @@ public class PlayerManager extends JPanel{
 		}
 		
 	}
+
+	public void setPercentWinning(double[] percentWin) {
+		myOdds.setText(percentWin[0]+"%");
+		for(int i = 0,j=1; i < nbrOpponent;i++)
+		{
+			if(!ranges[i].getText().trim().isEmpty())
+			{
+				result[i].setText(percentWin[j]+"%");
+				j++;
+			}
+		}
+	}
+
+	public void clearAll() {
+		for(int i = 0; i < nbrOpponent;i++)
+		{
+			ranges[i].setText("");
+			result[i].setText("");
+		}
+		myOdds.setText("");
+	}
+
 }

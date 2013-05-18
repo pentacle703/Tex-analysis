@@ -8,12 +8,12 @@ import scala.swing.BoxPanel
 import scala.swing.Orientation
 import javax.swing.JTextField
 import scala.swing.event.ButtonClicked
-import handRangeGenerator.Game
 
 class HandGeneratorDialog extends Dialog {
   var fieldToModify : JTextField = null
   var handGenerator = new HandRangeGenerator with Holdem
-  var buttonAccept = new Button("Valider");
+  var buttonAccept = new Button("Validate");
+
   contents = new BoxPanel(Orientation.Vertical)
   {
 	  contents += handGenerator
@@ -43,8 +43,14 @@ class HandGeneratorDialog extends Dialog {
 	  reactions += {
 	    case ButtonClicked(_) =>
 	      visible = false
-	      fieldToModify.setText(handGenerator.handRange.text)
+	      fieldToModify.setText(handGenerator.getCurrentHandList mkString ",")
 	      fieldToModify.requestFocusInWindow()
 	  }
   
+//  listenTo(buttonClear)
+//  	reactions += {
+//    case ButtonClicked(_) =>
+//      handGenerator.clean
+//  }
+//  
 }

@@ -10,7 +10,7 @@ public class MainWindow extends JFrame {
 	private static final long serialVersionUID = 1L;
 	public MainWindow()
 	{
-		this.setTitle("Tex'Analysis 5");
+		this.setTitle("Tex'Analysis");
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setSize(900, 645);
 		this.setResizable(false);

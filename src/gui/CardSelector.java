@@ -215,4 +215,8 @@ public class CardSelector extends JDialog {
 		}
 
 	}
+
+	public void clearAll() {
+		chosenCards.clear();
+	}
 }

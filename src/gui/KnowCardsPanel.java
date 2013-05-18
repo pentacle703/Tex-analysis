@@ -3,6 +3,7 @@ package gui;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -14,17 +15,21 @@ public class KnowCardsPanel extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 	CardSelector selector;
+	HoleCardsPanel holeCards;
+	DrawPanel draw;
 
-	public KnowCardsPanel(){
+	public KnowCardsPanel(MouseListener onCalculateClick, MouseListener onClearAllClick){
 		super();
 		this.setLayout(new GridBagLayout());
 
 		selector = new CardSelector();
 
-		HoleCardsPanel holeCards = new HoleCardsPanel(selector);
-		DrawPanel draw = new DrawPanel(selector);
+		holeCards = new HoleCardsPanel(selector);
+		draw = new DrawPanel(selector);
 		JButton clearAll = new JButton("Clear All");
+		clearAll.addMouseListener(onClearAllClick);
 		JButton goButton = new JButton("Go");
+		goButton.addMouseListener(onCalculateClick);
 		this.setOpaque(false);
 		
 		GridBagConstraints gbc = new GridBagConstraints();
@@ -52,5 +57,19 @@ public class KnowCardsPanel extends JPanel {
 		gbc.insets = new Insets(0, 0, 20, 0);
 		gbc.ipadx = 100;
 		this.add(goButton, gbc);
+	}
+
+	public String getPlayerCard() {
+		return holeCards.getPlayerCard();
+	}
+
+	public String getFlop() {
+		return draw.getFlop();
+	}
+
+	public void clearAll() {
+		selector.clearAll();
+		holeCards.clearAll();
+		draw.clearAll();
 	}
 }
